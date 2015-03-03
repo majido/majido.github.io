@@ -1,0 +1,162 @@
+<html>
+
+        <head>
+                <title>Scroll Snap-Points demo</title>
+                <meta name="viewport" content="width=device-width, initial-scale=1"></meta>
+                <style type="text/css">
+                    .scrollContainer.vertical{
+                        height: 420px;
+                        width: 420px;
+                        display: -webkit-flex;
+                        display: flex;
+                        flex-direction: column;
+                        -webkit-flex-direction: column;
+                        flex-wrap: nowrap;
+                        -webkit-flex-wrap: nowrap;
+
+                        align-items: center;
+                        -webkit-align-items: center;
+                        
+                        overflow-x: hidden;
+                        overflow-y: scroll;
+
+                        background-color: black;
+                    }
+
+                    .scrollContainer.horizontal {
+                        height: 420px;
+                        width: 420px;
+                        display: -webkit-flex;
+                        display: flex;
+                        flex-direction: row;
+                        -webkit-flex-direction: row;
+                        flex-wrap: nowrap;
+                        -webkit-flex-wrap: nowrap;
+                        align-items: center;
+                        -webkit-align-items: center;
+
+                        overflow-x: scroll;
+                        overflow-y: hidden;
+
+                        background-color: black;
+                    }
+                    .item {
+                        box-sizing: border-box;
+                        flex-shrink: 0; /* prevent flexbox to shrink images*/
+                        -webkit-flex-shrink: 0;
+                        background-color: black;
+                        padding: 10px;
+
+                        text-align: center;
+                        vertical-align: middle;
+                        font-size: 10em;
+                    }
+
+            
+                </style>
+                <script src="bower_components/regression-js/src/regression.js" > </script>
+                <script src="bower_components/bezier-easing/bezier-easing.js" > </script>
+
+                <script src="velocity_calculator.js" > </script>
+                <script src="fling_curve.js" > </script>
+
+                <script src="scroll-snap.js" > </script>
+
+        </head>
+
+        <body>
+                <h1>Snap Points Implementation - Demo</h1>
+                <br>
+                <input id='busywork' type='checkbox' value='unchecked' > <label>Add busy work to the main thread.</label>
+                <br>
+                <label>Delay in ms</label> <input id='delay' type='text' value='300' style='width:3em;'>
+                <br>
+                <br>
+                <h2>Horizontal scrolling</h2>
+                <div class="scrollContainer horizontal">
+                    <div class="item"><img src="http://lorempixel.com/300/300/cats/"></div>
+                    <div class="item"><img src="http://lorempixel.com/400/300/cats/"></div>
+                    <div class="item"><img src="http://lorempixel.com/400/400/cats/"></div>
+                    <div class="item"><img src="http://lorempixel.com/200/200/cats/"></div>
+                    <div class="item"><img src="http://lorempixel.com/300/300/cats/"></div>
+                    <div class="item"><img src="http://lorempixel.com/300/300/cats/"></div>
+                    <div class="item"><img src="http://lorempixel.com/350/350/cats/"></div>
+                    <div class="item"><img src="http://lorempixel.com/600/300/cats/"></div>
+                    <div class="item"><img src="http://lorempixel.com/300/300/cats/"></div>
+                    <div class="item"><img src="http://lorempixel.com/300/300/cats/"></div>
+                </div>
+
+                <h2>Vertical scrolling</h2>
+
+                <div class="scrollContainer vertical">
+                    <div class="item"><img src="http://lorempixel.com/300/300/city/"></div>
+                    <div class="item"><img src="http://lorempixel.com/400/300/city/"></div>
+                    <div class="item"><img src="http://lorempixel.com/400/400/city/"></div>
+                    <div class="item"><img src="http://lorempixel.com/200/200/city/"></div>
+                    <div class="item"><img src="http://lorempixel.com/300/300/city/"></div>
+                    <div class="item"><img src="http://lorempixel.com/400/400/city/"></div>
+                    <div class="item"><img src="http://lorempixel.com/300/300/city/"></div>
+                    <div class="item"><img src="http://lorempixel.com/300/300/city/"></div>
+                    <div class="item"><img src="http://lorempixel.com/300/300/city/"></div>
+                    <div class="item"><img src="http://lorempixel.com/300/300/city/"></div>
+                </div>
+
+
+        </body>
+
+        <script>
+        (function(){
+                "use strict";
+
+                var $vscrollContainer = document.querySelector('.scrollContainer.vertical'); 
+                var vsnap = new ScrollSnap($vscrollContainer, {
+                  mode: 'vertical',
+                  velocityEstimator: 'scroll',
+                  snapDestination: 'center'
+                });
+
+                var $hscrollContainer = document.querySelector('.scrollContainer.horizontal'); 
+                var hsnap = new ScrollSnap($hscrollContainer, {
+                  mode: 'horizontal'
+                });
+
+                // TODO: consult with tdresser to ensure if this has any real effect
+                document.addEventListener('scroll', function() {
+                  // Make 100% sure chrome knows we have a scroll listener.
+                });
+               
+                //handle busywork controls
+                var $busywork = document.getElementById('busywork');
+                var timer;
+                $busywork.addEventListener('click', function(event){
+                  if ($busywork.checked) {
+                    timer = window.setInterval(doSomethingDumb, getDelay() + 200);
+                  } else {
+                    if (timer)
+                      window.clearInterval(timer);
+                  }
+                });
+
+                function getDelay(){
+                  return parseInt(document.getElementById('delay').value);
+                }
+
+                var counter = 0;
+                function doSomethingDumb(){
+                  // This is a particularly dumb example of adding jank to a web page, but in reality
+                  // it can be much more subtle.  Other complex javascript, expensive layout and loading/decoding images
+                  // might take more than 16ms, resulting in at least one dropped frame when scrolling.
+                  counter++;
+                  console.log('Doing something dumb #' + counter);
+                  var start = Date.now();
+                  var end = 0;
+                  var delay = getDelay();
+                  while (end < start + delay)
+                    end = Date.now();
+                  console.log('Done');
+                }
+
+        }());
+
+        </script>
+</html>
