@@ -1,0 +1,167 @@
+<html>
+
+        <head>
+                <title>Scroll Snap-Points demo</title>
+                <meta name="viewport" content="width=device-width, initial-scale=1"></meta>
+                <style type="text/css">
+                    .scrollContainer.vertical{
+                        height: 300px;
+                        width: 300px;
+                        display: -webkit-flex;
+                        display: flex;
+                        flex-direction: column;
+                        -webkit-flex-direction: column;
+                        flex-wrap: nowrap;
+                        -webkit-flex-wrap: nowrap;
+
+                        overflow-x: hidden;
+                        overflow-y: scroll;
+                    }
+
+                    .scrollContainer.horizontal {
+                        height: 300px;
+                        width: 300px;
+                        display: -webkit-flex;
+                        display: flex;
+                        flex-direction: row;
+                        -webkit-flex-direction: row;
+                        flex-wrap: nowrap;
+                        -webkit-flex-wrap: nowrap;
+
+                        overflow-x: scroll;
+                        overflow-y: hidden;
+                    }
+                    .item {
+                        box-sizing:border-box;
+                        min-width: 100%;
+                        min-height: 100%;
+                        border: solid;
+                        background-color: eee;
+                        text-align: center;
+                        vertical-align: middle;
+                        font-size: 10em;
+                    }
+
+            
+                </style>
+                <script src="bower_components/regression-js/src/regression.js" > </script>
+                <script src="bower_components/bezier-easing/bezier-easing.js" > </script>
+
+                <script src="velocity_calculator.js" > </script>
+                <script src="fling_curve.js" > </script>
+
+                <script src="scroll-snap.js" > </script>
+
+        </head>
+
+        <body>
+                <h1>Snap Points Implementation - Demo</h1>
+                <label>Velocity Estimator<sup>*</sup>:</label>
+                <select id="velocity_estimator">
+                <option value="scroll">Scroll</option>
+                <option value="touch">Touch</option>
+                </select>
+                <br>
+                <input id='busywork' type='checkbox' value='unchecked' > <label>Add busy work to the main thread.</label>
+                <br>
+                <label>Delay in ms</label> <input id='delay' type='text' value='300' style='width:3em;'>
+                <p style="font-size:smaller">* Use 'scroll' when scroll is in sync (i.e., main thread scrolling) otherwise use 'touch' and expect jitter.</p>
+                <!-- <p>* Use touch only when scroll events are not frequent. E.g. when scroll is happening on UI thread and not the main thread.</p>  -->
+                <br>
+                <br>
+                <h2>Horizontal scrolling</h2>
+                <div class="scrollContainer horizontal">
+                    <div class="item">1</div>
+                    <div class="item">2</div>
+                    <div class="item">3</div>
+                    <div class="item">4</div>
+                    <div class="item">5</div>
+                    <div class="item">6</div>
+                    <div class="item">7</div>
+                    <div class="item">8</div>
+                    <div class="item">9</div>
+                    <div class="item">10</div>
+                </div>
+
+                <h2>Vertical scrolling</h2>
+
+                <div class="scrollContainer vertical">
+                    <div class="item">1</div>
+                    <div class="item">2</div>
+                    <div class="item">3</div>
+                    <div class="item">4</div>
+                    <div class="item">5</div>
+                    <div class="item">6</div>
+                    <div class="item">7</div>
+                    <div class="item">8</div>
+                    <div class="item">9</div>
+                    <div class="item">10</div>
+
+                </div>
+
+
+        </body>
+
+        <script>
+        (function(){
+                "use strict";
+
+                var $vscrollContainer = document.querySelector('.scrollContainer.vertical'); 
+                var vsnap = new ScrollSnap($vscrollContainer, {
+                  mode: 'vertical',
+                  velocityEstimator: 'scroll',
+                  interval: 300 /* snap points are at 300 pixel intervals*/
+                });
+
+                var $hscrollContainer = document.querySelector('.scrollContainer.horizontal'); 
+                var hsnap = new ScrollSnap($hscrollContainer, {
+                  mode: 'horizontal',
+                  velocityEstimator: 'scroll',
+                  interval: 300 /* snap points are at 300 pixel intervals*/
+                });
+
+                // TODO: consult with tdresser to ensure if this has any real effect
+                document.addEventListener('scroll', function() {
+                  // Make 100% sure chrome knows we have a scroll listener.
+                });
+                var $ve = document.querySelector('#velocity_estimator');
+                $ve.addEventListener('change', function(event){
+                    var ve = event.target.value;
+                    hsnap.setOptions({velocityEstimator:ve});
+                    vsnap.setOptions({velocityEstimator:ve});
+                });
+                //handle busywork controls
+                var $busywork = document.getElementById('busywork');
+                var timer;
+                $busywork.addEventListener('click', function(event){
+                  if ($busywork.checked) {
+                    timer = window.setInterval(doSomethingDumb, getDelay() + 200);
+                  } else {
+                    if (timer)
+                      window.clearInterval(timer);
+                  }
+                });
+
+                function getDelay(){
+                  return parseInt(document.getElementById('delay').value);
+                }
+
+                var counter = 0;
+                function doSomethingDumb(){
+                  // This is a particularly dumb example of adding jank to a web page, but in reality
+                  // it can be much more subtle.  Other complex javascript, expensive layout and loading/decoding images
+                  // might take more than 16ms, resulting in at least one dropped frame when scrolling.
+                  counter++;
+                  console.log('Doing something dumb #' + counter);
+                  var start = Date.now();
+                  var end = 0;
+                  var delay = getDelay();
+                  while (end < start + delay)
+                    end = Date.now();
+                  console.log('Done');
+                }
+
+        }());
+
+        </script>
+</html>
