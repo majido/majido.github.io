@@ -11,6 +11,6 @@ title: Demos
     *  [Snap Points](snap-points/before-scroll/index.html)
 * Test pages
     * [Element snapping](snap-points/tests/element-snap-coordinates.html)
-    * [Repeat snapping] (snap-points/tests/repeat.html)
+    * [Repeat snapping](snap-points/tests/repeat.html)
 
 
