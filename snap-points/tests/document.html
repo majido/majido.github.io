@@ -7,27 +7,27 @@
 
     <title>Snap points - snap coordinates</title>
     <style>
-        .scrollable {
-            overflow: scroll;
-            -webkit-overflow-scrolling: touch;
-            border: 1px dashed black;
-            height: 500px;
-            margin: 0 10px;
+        body {
+            height: 1000px;
+            width: 100%
+        }
+        
+        .snap-receiver {
+            -ms-scroll-snap-type: mandatory;
+            -webkit-scroll-snap-type: mandatory;
+            scroll-snap-type: mandatory;
         }
         
         .center-snap-receiver {
-            -ms-scroll-snap-type: mandatory;
-            -ms-scroll-snap-destination: 0 0;
-            -webkit-scroll-snap-type: mandatory;
-            -webkit-scroll-snap-destination: 0 0;
-            scroll-snap-type: mandatory;
-            scroll-snap-destination: 0 0;
+           scroll-snap-destination: 0 0;
+           -ms-scroll-snap-destination: 0 0;
+           -webkit-scroll-snap-destination: 0 0;
         }
-        
+
         .snap-point {
             margin-top: 100px;
-            width: 15px;
-            height: 15px;
+            width: 1em;
+            height: 1em;
             border: 1px solid black;
             -ms-scroll-snap-coordinate: 0 0px;
             -webkit-scroll-snap-coordinate: 0 0px;
@@ -49,6 +49,7 @@
             border: 1px solid blue;
         }
         
+
         .large-content {
             height: 3000px;
             width: 100%;
@@ -73,61 +74,43 @@
     </style>
 </head>
 
-<body>
-    <div id='container' class='center-snap-receiver scrollable'>
-        <div class='snap-point'></div>
-        <div class='nested'>
-            <div class='snap-point'></div>
-        </div>
-        <div class='nested'>
-            <div class='nested'>
-                <div class='snap-point'></div>
-            </div>
-        </div>
-        <div class='snap-point'></div>
-        <div class='snap-point'></div>
-        <div class='nested'>
-            <div class='snap-point'></div>
-        </div>
-        <div class='nested'>
-            <div class='nested'>
-                <div class='snap-point'></div>
-            </div>
-        </div>
-        <div class='nested'>
-            <div class='snap-point'></div>
-        </div>
-        <div class='snap-point'></div>
-        <div class='nested'>
-            <div class='snap-point'></div>
-        </div>
-        <div class='snap-point'></div>
-        <div class='snap-point'></div>
-        <div class='nested'>
-            <div class='snap-point'></div>
-        </div>
-         <div class='snap-point'></div>
-        <div class='nested'>
-            <div class='snap-point'></div>
-        </div>
-        <div class='nested'>
-            <div class='nested'>
-                <div class='snap-point'></div>
-            </div>
-        </div>
-         <div class='snap-point'></div>
-        <div class='nested'>
-            <div class='snap-point'></div>
-        </div>
-        <div class='nested'>
-            <div class='nested'>
-                <div class='snap-point'></div>
-            </div>
-        </div>
-        <div class='large-content'></div>
-    </div>
+<body id='container' class='snap-receiver'>
     <button onclick='prependContent();'>Prepend content</button>
     <button onclick='resize();'>Resize</button>
+
+    <div class='snap-point'></div>
+    <div class='nested'>
+        <div class='snap-point'></div>
+    </div>
+    <div class='nested'>
+        <div class='nested'>
+            <div class='snap-point'></div>
+        </div>
+    </div>
+    <div class='snap-point'></div>
+    <div class='snap-point'></div>
+    <div class='nested'>
+        <div class='snap-point'></div>
+    </div>
+    <div class='nested'>
+        <div class='nested'>
+            <div class='snap-point'></div>
+        </div>
+    </div>
+    <div class='nested'>
+        <div class='snap-point'></div>
+    </div>
+    <div class='snap-point'></div>
+    <div class='nested'>
+        <div class='snap-point'></div>
+    </div>
+    <div class='snap-point'></div>
+    <div class='snap-point'></div>
+    <div class='nested'>
+        <div class='snap-point'></div>
+    </div>
+    <div class='large-content'></div>
+
 
     <script>
         function prependContent() {
@@ -139,8 +122,8 @@
             var container = document.getElementById('container');
             container.style.height = (container.offsetHeight - 100) + 'px';
             container.style.width = (container.offsetWidth - 100) + 'px';
-
         }
+
     </script>
 </body>
 

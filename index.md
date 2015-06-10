@@ -12,5 +12,7 @@ title: Demos
 * Test pages
     * [Element snapping](snap-points/tests/element-snap-coordinates.html)
     * [Repeat snapping](snap-points/tests/repeat.html)
+    * [Snap points on body](snap-points/tests/document.html)
+
 
 
