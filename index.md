@@ -12,7 +12,9 @@ title: Demos
 * Test pages
     * [Element snapping](snap-points/tests/element-snap-coordinates.html)
     * [Repeat snapping](snap-points/tests/repeat.html)
-    * [Snap points on body](snap-points/tests/document.html)
+    * [Transform and inline elements](snap-points/tests/snap-coordinate-transforms.html)
+    * [Snap points on body](snap-points/tests/body-snap.html)
+    * [Gallery](http://output.jsbin.com/cumini/quiet) - based on spec example
 
 
 

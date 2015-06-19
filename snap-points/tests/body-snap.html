@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Snap points - snap coordinates</title>
+    <style>
+        body {
+            height: 1000px;
+            width: 100%
+        }
+        
+        .snap-receiver {
+            -ms-scroll-snap-type: mandatory;
+            -webkit-scroll-snap-type: mandatory;
+            scroll-snap-type: mandatory;
+        }
+        
+        .center-snap-receiver {
+           scroll-snap-destination: 0 0;
+           -ms-scroll-snap-destination: 0 0;
+           -webkit-scroll-snap-destination: 0 0;
+        }
+
+        .snap-point {
+            margin-top: 100px;
+            width: 1em;
+            height: 1em;
+            border: 1px solid black;
+            -ms-scroll-snap-coordinate: 0 0px;
+            -webkit-scroll-snap-coordinate: 0 0px;
+            scroll-snap-coordinate: 0 0px;
+        }
+        
+        .snap-point::after {
+            font-size: 1em;
+            position: relative;
+            content: '+';
+        }
+        
+        .nested > .snap-point {
+            margin-left: 50px;
+            border: 1px solid red;
+        }
+        .nested > .nested > .snap-point {
+            margin-left: 100px;
+            border: 1px solid blue;
+        }
+        
+
+        .large-content {
+            height: 3000px;
+            width: 100%;
+        }
+        
+        .small-content {
+            height: 200px;
+            width: 100%;
+        }
+        
+        .green {
+            background: linear-gradient(to bottom, green, white);
+        }
+        
+        .blue {
+            background: linear-gradient(to bottom, blue, white);
+        }
+        
+        .yellow {
+            background: linear-gradient(to bottom, yellow, white);
+        }
+    </style>
+</head>
+
+<body id='container' class='snap-receiver'>
+    <button onclick='prependContent();'>Prepend content</button>
+    <button onclick='resize();'>Resize</button>
+
+    <div class='snap-point'></div>
+    <div class='nested'>
+        <div class='snap-point'></div>
+    </div>
+    <div class='nested'>
+        <div class='nested'>
+            <div class='snap-point'></div>
+        </div>
+    </div>
+    <div class='snap-point'></div>
+    <div class='snap-point'></div>
+    <div class='nested'>
+        <div class='snap-point'></div>
+    </div>
+    <div class='nested'>
+        <div class='nested'>
+            <div class='snap-point'></div>
+        </div>
+    </div>
+    <div class='nested'>
+        <div class='snap-point'></div>
+    </div>
+    <div class='snap-point'></div>
+    <div class='nested'>
+        <div class='snap-point'></div>
+    </div>
+    <div class='snap-point'></div>
+    <div class='snap-point'></div>
+    <div class='nested'>
+        <div class='snap-point'></div>
+    </div>
+    <div class='large-content'></div>
+
+
+    <script>
+        function prependContent() {
+            var content = document.getElementById('container').innerHTML;
+            document.getElementById('container').innerHTML = "<div class='small-content green'></div>" + content;
+        }
+
+        function resize() {
+            var container = document.getElementById('container');
+            container.style.height = (container.offsetHeight - 100) + 'px';
+            container.style.width = (container.offsetWidth - 100) + 'px';
+        }
+
+    </script>
+</body>
+
+</html>
