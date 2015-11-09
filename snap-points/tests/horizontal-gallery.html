@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Scroll Snap Points demo - horizontal gallery</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1"></meta>
+  <style type="text/css">
+  body {
+    margin: 0;
+  }
+  
+  .gallery.horizontal {
+    height: 100%;
+    width: 100%;
+    overflow-x: scroll;
+    overflow-y: hidden;
+
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-items: center;
+    background-color: black;
+ 
+    /* Specifies that each element’s snap coordinate should
+       align with the center of the scroll container */
+    scroll-snap-type: mandatory;
+    -ms-scroll-snap-type: mandatory;
+    -webkit-scroll-snap-type: mandatory;
+
+    
+    scroll-snap-destination: 50% 50%;
+    -ms-scroll-snap-destination: 50% 50%;
+    -webkit-scroll-snap-destination: 50% 50%;
+  
+    /* This is a webkit quirk */
+    -webkit-scroll-snap-points-x: elements;
+    -ms-scroll-snap-points-x: elements;
+  }
+  
+  .item {
+    box-sizing: border-box;
+    flex-shrink: 0;
+    vertical-align: middle;
+    background-color: black;
+    text-align: center;
+    font-size: 10em;
+    padding: 10px;
+
+    /* Defines the center of each photo as the
+   coordinate that should be used for snapping */
+    scroll-snap-coordinate: 50% 50%;
+    -ms-scroll-snap-coordinate: 50% 50%;
+    -webkit-scroll-snap-coordinate: 50% 50%;
+  }
+
+  .item > img {
+    border-radius: 25px;
+  }
+  </style>
+</head>
+
+<body>
+  <div class="gallery horizontal">
+    <div class="item"><img src="http://lorempixel.com/300/300/cats/"></div>
+    <div class="item"><img src="http://lorempixel.com/400/300/cats/"></div>
+    <div class="item"><img src="http://lorempixel.com/400/400/cats/"></div>
+    <div class="item"><img src="http://lorempixel.com/200/200/cats/"></div>
+    <div class="item"><img src="http://lorempixel.com/300/300/cats/"></div>
+    <div class="item"><img src="http://lorempixel.com/300/300/cats/"></div>
+    <div class="item"><img src="http://lorempixel.com/350/350/cats/"></div>
+    <div class="item"><img src="http://lorempixel.com/600/300/cats/"></div>
+    <div class="item"><img src="http://lorempixel.com/320/320/cats/"></div>
+    <div class="item"><img src="http://lorempixel.com/350/300/cats/"></div>
+    <div class="item"><img src="http://lorempixel.com/300/300/cats/"></div>
+    <div class="item"><img src="http://lorempixel.com/400/300/cats/"></div>
+    <div class="item"><img src="http://lorempixel.com/400/400/cats/"></div>
+    <div class="item"><img src="http://lorempixel.com/200/200/cats/"></div>
+    <div class="item"><img src="http://lorempixel.com/300/300/cats/"></div>
+    <div class="item"><img src="http://lorempixel.com/300/300/cats/"></div>
+    <div class="item"><img src="http://lorempixel.com/350/350/cats/"></div>
+    <div class="item"><img src="http://lorempixel.com/600/300/cats/"></div>
+    <div class="item"><img src="http://lorempixel.com/320/320/cats/"></div>
+    <div class="item"><img src="http://lorempixel.com/350/300/cats/"></div>
+    <div class="item"><img src="http://lorempixel.com/300/300/cats/"></div>
+    <div class="item"><img src="http://lorempixel.com/400/300/cats/"></div>
+    <div class="item"><img src="http://lorempixel.com/400/400/cats/"></div>
+    <div class="item"><img src="http://lorempixel.com/200/200/cats/"></div>
+    <div class="item"><img src="http://lorempixel.com/300/300/cats/"></div>
+    <div class="item"><img src="http://lorempixel.com/300/300/cats/"></div>
+    <div class="item"><img src="http://lorempixel.com/350/350/cats/"></div>
+    <div class="item"><img src="http://lorempixel.com/600/300/cats/"></div>
+    <div class="item"><img src="http://lorempixel.com/320/320/cats/"></div>
+    <div class="item"><img src="http://lorempixel.com/350/300/cats/"></div>
+    <div class="item"><img src="http://lorempixel.com/300/300/cats/"></div>
+    <div class="item"><img src="http://lorempixel.com/400/300/cats/"></div>
+    <div class="item"><img src="http://lorempixel.com/400/400/cats/"></div>
+    <div class="item"><img src="http://lorempixel.com/200/200/cats/"></div>
+    <div class="item"><img src="http://lorempixel.com/300/300/cats/"></div>
+    <div class="item"><img src="http://lorempixel.com/300/300/cats/"></div>
+    <div class="item"><img src="http://lorempixel.com/350/350/cats/"></div>
+    <div class="item"><img src="http://lorempixel.com/600/300/cats/"></div>
+    <div class="item"><img src="http://lorempixel.com/320/320/cats/"></div>
+    <div class="item"><img src="http://lorempixel.com/350/300/cats/"></div>
+    <div class="item"><img src="http://lorempixel.com/300/300/cats/"></div>
+    <div class="item"><img src="http://lorempixel.com/400/300/cats/"></div>
+    <div class="item"><img src="http://lorempixel.com/400/400/cats/"></div>
+    <div class="item"><img src="http://lorempixel.com/200/200/cats/"></div>
+    <div class="item"><img src="http://lorempixel.com/300/300/cats/"></div>
+    <div class="item"><img src="http://lorempixel.com/300/300/cats/"></div>
+    <div class="item"><img src="http://lorempixel.com/350/350/cats/"></div>
+    <div class="item"><img src="http://lorempixel.com/600/300/cats/"></div>
+    <div class="item"><img src="http://lorempixel.com/320/320/cats/"></div>
+    <div class="item"><img src="http://lorempixel.com/350/300/cats/"></div>
+    <div class="item"><img src="http://lorempixel.com/300/300/cats/"></div>
+    <div class="item"><img src="http://lorempixel.com/400/300/cats/"></div>
+    <div class="item"><img src="http://lorempixel.com/400/400/cats/"></div>
+    <div class="item"><img src="http://lorempixel.com/200/200/cats/"></div>
+    <div class="item"><img src="http://lorempixel.com/300/300/cats/"></div>
+    <div class="item"><img src="http://lorempixel.com/300/300/cats/"></div>
+    <div class="item"><img src="http://lorempixel.com/350/350/cats/"></div>
+    <div class="item"><img src="http://lorempixel.com/600/300/cats/"></div>
+    <div class="item"><img src="http://lorempixel.com/320/320/cats/"></div>
+    <div class="item"><img src="http://lorempixel.com/350/300/cats/"></div>
+    <div class="item"><img src="http://lorempixel.com/300/300/cats/"></div>
+    <div class="item"><img src="http://lorempixel.com/400/300/cats/"></div>
+    <div class="item"><img src="http://lorempixel.com/400/400/cats/"></div>
+    <div class="item"><img src="http://lorempixel.com/200/200/cats/"></div>
+    <div class="item"><img src="http://lorempixel.com/300/300/cats/"></div>
+    <div class="item"><img src="http://lorempixel.com/300/300/cats/"></div>
+    <div class="item"><img src="http://lorempixel.com/350/350/cats/"></div>
+    <div class="item"><img src="http://lorempixel.com/600/300/cats/"></div>
+    <div class="item"><img src="http://lorempixel.com/320/320/cats/"></div>
+    <div class="item"><img src="http://lorempixel.com/350/300/cats/"></div>
+    <div class="item"><img src="http://lorempixel.com/300/300/cats/"></div>
+    <div class="item"><img src="http://lorempixel.com/400/300/cats/"></div>
+    <div class="item"><img src="http://lorempixel.com/400/400/cats/"></div>
+    <div class="item"><img src="http://lorempixel.com/200/200/cats/"></div>
+    <div class="item"><img src="http://lorempixel.com/300/300/cats/"></div>
+    <div class="item"><img src="http://lorempixel.com/300/300/cats/"></div>
+    <div class="item"><img src="http://lorempixel.com/350/350/cats/"></div>
+    <div class="item"><img src="http://lorempixel.com/600/300/cats/"></div>
+    <div class="item"><img src="http://lorempixel.com/320/320/cats/"></div>
+    <div class="item"><img src="http://lorempixel.com/350/300/cats/"></div>
+    <div class="item"><img src="http://lorempixel.com/300/300/cats/"></div>
+    <div class="item"><img src="http://lorempixel.com/400/300/cats/"></div>
+    <div class="item"><img src="http://lorempixel.com/400/400/cats/"></div>
+    <div class="item"><img src="http://lorempixel.com/200/200/cats/"></div>
+    <div class="item"><img src="http://lorempixel.com/300/300/cats/"></div>
+    <div class="item"><img src="http://lorempixel.com/300/300/cats/"></div>
+    <div class="item"><img src="http://lorempixel.com/350/350/cats/"></div>
+    <div class="item"><img src="http://lorempixel.com/600/300/cats/"></div>
+    <div class="item"><img src="http://lorempixel.com/320/320/cats/"></div>
+    <div class="item"><img src="http://lorempixel.com/350/300/cats/"></div>
+  </div>
+</body>
+
+</html>

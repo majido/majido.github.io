@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Scroll Snap Points demo - 2D gallery with repeat</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1"></meta>
+  <style type="text/css">
+  .gallery2D {
+    width: 100vw;
+    height: 100vh;
+    overflow: scroll;
+    -webkit-overflow-scrolling: touch;
+
+    scroll-snap-type: mandatory;
+    scroll-snap-points-x: repeat(200px);
+    scroll-snap-points-y: repeat(200px);
+    -ms-scroll-snap-type: mandatory;
+    -ms-scroll-snap-points-x: repeat(200px);
+    -ms-scroll-snap-points-y: repeat(200px);
+    -webkit-scroll-snap-type: mandatory;
+    -webkit-scroll-snap-points-x: repeat(200px);
+    -webkit-scroll-snap-points-y: repeat(200px);
+  }
+  
+  .gallery2D > div {
+    height: 1000vh;
+    width: 1000vw;
+    background-color: #1E88E5;
+    background-image: linear-gradient(white 2px, transparent 2px), linear-gradient(90deg, white 2px, transparent 2px);
+    background-size: 200px 200px, 200px 200px;
+    background-position: -2px -2px, -2px -2px;
+  }
+  </style>
+</head>
+
+<body>
+  <div class="gallery2D">
+    <div></div>
+  </div>
+</body>
+
+</html>
