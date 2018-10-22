@@ -21,4 +21,9 @@ title: Demos
     * [2D Grid](snap-points/tests/2d-grid.html)
 
 
+### ScrollTimeline
+Demos work in Chrome Canary with flag: --enable-experimental-web-platform-features
 
+* [Parallax](scroll-timeline/parallax.html)
+* [Flyin](scroll-timeline/flyin.html)
+* [LTR, RTL direction](scroll-timeline/direction.html)
